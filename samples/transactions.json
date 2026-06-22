@@ -1,0 +1,37 @@
+[
+  {
+    "_comment": "MONEY SHOT — $12k server/workstation hardware expensed to Office Supplies. Should be capitalized.",
+    "vendor": "Dell",
+    "amount": 12000,
+    "account": "Office Supplies",
+    "description": "Server and workstation hardware"
+  },
+  {
+    "_comment": "Business meal coded at 100% — should be 50%.",
+    "vendor": "Joe's Grill",
+    "amount": 200,
+    "account": "Meals - 100%",
+    "description": "Client dinner"
+  },
+  {
+    "_comment": "Owner's personal item sitting in the business books.",
+    "vendor": "Amazon",
+    "amount": 800,
+    "account": "Office Expenses",
+    "description": "Owner personal headphones"
+  },
+  {
+    "_comment": "$1,500 laptop — under the $2,500 safe harbor, fine to expense.",
+    "vendor": "Apple",
+    "amount": 1500,
+    "account": "Office Supplies",
+    "description": "MacBook Air laptop"
+  },
+  {
+    "_comment": "Ordinary deductible expense — fine.",
+    "vendor": "Figma",
+    "amount": 300,
+    "account": "Software Subscriptions",
+    "description": "Design tool subscription"
+  }
+]

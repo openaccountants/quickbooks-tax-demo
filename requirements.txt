@@ -1,0 +1,2 @@
+# The demo runs on the Python standard library alone (urllib + json).
+# Live mode needs a QuickBooks sandbox token (QBO_ACCESS_TOKEN + QBO_REALM_ID) — free, no approval.
