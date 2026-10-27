@@ -1,17 +1,19 @@
 # QuickBooks → OpenAccountants: bookkeeping-coding review
 
-**The pitch in one line:** QuickBooks holds the books. OpenAccountants reviews how each transaction is **coded for tax** — catching the classics that cost money at year-end — signed off by a named licensed accountant.
+Demonstrates tax-coding checks on QuickBooks-shaped transactions using OpenAccountants sample rules, with an optional live MCP connection.
+
+Default runs use bundled sample responses. Their rates, verdicts and reviewer labels are illustrative fixtures, not evidence that an accountant reviewed the demo or a live skill. For live use, check the fetched skill's review status, reviewer, version and review date against the [review method](https://www.openaccountants.com/review-method). A jurisdiction lead's name alone does not establish review. Have a qualified professional review outputs before filing or acting on them.
 
 ```
 QuickBooks transactions
   └─ { vendor, amount, account, description }
-        └─ OpenAccountants MCP  →  load the verified bookkeeping/tax-coding skill
+        └─ OpenAccountants MCP  →  load the bookkeeping/tax-coding skill
               └─ Verdict:  ⚠️ capital asset expensed — should be capitalized   ← the catch
                            ⚠️ meals coded at 100% (they're 50%)
                            ⚠️ owner's personal expense in the business books
                            ✅ under the de-minimis safe harbor / ordinary expense
                  · the rule that decided it (cited)
-                 · the named CPA who signed it off
+                 · the skill's published review status, if present
 ```
 
 ![QuickBooks → OpenAccountants demo](demo.svg)
@@ -26,7 +28,7 @@ QuickBooks records *where* money went; it doesn't know whether the **tax coding*
 - **business meals** coded at 100% are only 50% deductible;
 - an **owner's personal** purchase in the business books isn't deductible at all.
 
-OpenAccountants is the review layer on top of the ledger — verified rules, a named accountant behind them, and it works on the QuickBooks data your customers already have (free developer sandbox, no approval).
+OpenAccountants is the review layer on top of the ledger; using the loaded rules, whose review status must be checked, and it works on the QuickBooks data your customers already have (free developer sandbox, no approval).
 
 ## What it shows
 
@@ -54,7 +56,7 @@ python pipeline.py samples/transactions.json
 ### Go live
 
 ```bash
-export OA_MCP_TOKEN=...        # OpenAccountants account token (uses the live verified rules)
+export OA_MCP_TOKEN=...        # OpenAccountants account token (uses live skill content; check review status)
 export QBO_ACCESS_TOKEN=...    # QuickBooks Online sandbox token (free, no approval)
 export QBO_REALM_ID=...
 python pipeline.py
@@ -72,5 +74,5 @@ python pipeline.py
 
 ## Honest notes
 
-- `coding_check.py` is a **coding-review signal** (de-minimis capitalization, meals 50%, personal expenses) — not a full chart-of-accounts audit or a depreciation schedule. Production leans on the full OA skill + an agent step; the named-CPA sign-off makes the verdict relianceable.
-- Rules (the $2,500 de-minimis safe harbor, 50% meals) are US figures; live, every value comes from `get_skill`. The verifier (Amir Pelinkovic) is the real OpenAccountants US lead.
+- `coding_check.py` is a **coding-review signal** (de-minimis capitalization, meals 50%, personal expenses); not a full chart-of-accounts audit or a depreciation schedule. Production leans on the full OA skill + an agent step; professional review must be established for the specific skill version and your facts.
+- Rules (the $2,500 de-minimis safe harbor, 50% meals) are US figures; the bundled reviewer label is illustrative. Inspect the actual `get_skill` response and its review record in live mode.
