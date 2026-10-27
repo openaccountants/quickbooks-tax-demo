@@ -2,7 +2,7 @@
 
 Demonstrates tax-coding checks on QuickBooks-shaped transactions using OpenAccountants sample rules, with an optional live MCP connection.
 
-Default runs use bundled sample responses. Their rates, verdicts and reviewer labels are illustrative fixtures, not evidence that an accountant reviewed the demo or a live Guide. For live use, check the fetched Guide's review status, reviewer, version and review date against the [review method](https://www.openaccountants.com/review-method). A jurisdiction lead's name alone does not establish review. Have a qualified professional review outputs before filing or acting on them.
+Default runs use bundled sample responses. Their rates, verdicts and reviewer labels are illustrative fixtures, not evidence that an accountant reviewed the demo or a live skill. For live use, check the fetched skill's review status, reviewer, version and review date against the [review method](https://www.openaccountants.com/review-method). A jurisdiction lead's name alone does not establish review. Have a qualified professional review outputs before filing or acting on them.
 
 ```
 QuickBooks transactions
@@ -13,7 +13,7 @@ QuickBooks transactions
                            ⚠️ owner's personal expense in the business books
                            ✅ under the de-minimis safe harbor / ordinary expense
                  · the rule that decided it (cited)
-                 · the Guide's published review status, if present
+                 · the skill's published review status, if present
 ```
 
 ![QuickBooks → OpenAccountants demo](demo.svg)
@@ -56,7 +56,7 @@ python pipeline.py samples/transactions.json
 ### Go live
 
 ```bash
-export OA_MCP_TOKEN=...        # OpenAccountants account token (uses live Guide content; check review status)
+export OA_MCP_TOKEN=...        # OpenAccountants account token (uses live skill content; check review status)
 export QBO_ACCESS_TOKEN=...    # QuickBooks Online sandbox token (free, no approval)
 export QBO_REALM_ID=...
 python pipeline.py
@@ -74,5 +74,5 @@ python pipeline.py
 
 ## Honest notes
 
-- `coding_check.py` is a **coding-review signal** (de-minimis capitalization, meals 50%, personal expenses); not a full chart-of-accounts audit or a depreciation schedule. Production leans on the full OA skill + an agent step; professional review must be established for the specific Guide version and your facts.
+- `coding_check.py` is a **coding-review signal** (de-minimis capitalization, meals 50%, personal expenses); not a full chart-of-accounts audit or a depreciation schedule. Production leans on the full OA skill + an agent step; professional review must be established for the specific skill version and your facts.
 - Rules (the $2,500 de-minimis safe harbor, 50% meals) are US figures; the bundled reviewer label is illustrative. Inspect the actual `get_skill` response and its review record in live mode.
